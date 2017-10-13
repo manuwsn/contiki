@@ -71,7 +71,7 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>0.0</x>
+        <x>0.25</x>
         <y>6.503124999999763</y>
         <z>0.5</z>
       </interface_config>
@@ -287,7 +287,7 @@
   <plugin>
     org.contikios.cooja.plugins.SimControl
     <width>443</width>
-    <z>1</z>
+    <z>0</z>
     <height>184</height>
     <location_x>3</location_x>
     <location_y>15</location_y>
@@ -295,15 +295,15 @@
   <plugin>
     org.contikios.cooja.plugins.Visualizer
     <plugin_config>
+      <moterelations>true</moterelations>
       <skin>org.contikios.cooja.plugins.skins.IDVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.UDGMVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.AttributeVisualizerSkin</skin>
-      <skin>org.contikios.cooja.plugins.skins.TrafficVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.GridVisualizerSkin</skin>
       <viewport>100.37590850013936 0.0 0.0 100.37590850013936 319.0490553651442 187.20345051026237</viewport>
     </plugin_config>
     <width>661</width>
-    <z>3</z>
+    <z>1</z>
     <height>903</height>
     <location_x>20</location_x>
     <location_y>103</location_y>
@@ -311,20 +311,20 @@
   <plugin>
     org.contikios.cooja.plugins.LogListener
     <plugin_config>
-      <filter>ID:4</filter>
+      <filter>DATA recv</filter>
       <formatted_time />
       <coloring />
     </plugin_config>
     <width>937</width>
-    <z>0</z>
-    <height>687</height>
+    <z>2</z>
+    <height>764</height>
     <location_x>911</location_x>
     <location_y>75</location_y>
   </plugin>
   <plugin>
     org.contikios.cooja.plugins.ScriptRunner
     <plugin_config>
-      <script>var Xo=0.0;
+      <script>var Xo=0.25;
     var Yo=-0.5;
     var Zo=0.5;
     
@@ -357,10 +357,25 @@ sim.stopSimulation();</script>
       <active>true</active>
     </plugin_config>
     <width>651</width>
-    <z>2</z>
+    <z>3</z>
     <height>858</height>
     <location_x>1000</location_x>
     <location_y>155</location_y>
+  </plugin>
+  <plugin>
+    org.contikios.cooja.plugins.RadioLogger
+    <plugin_config>
+      <split>150</split>
+      <formatted_time />
+      <showdups>false</showdups>
+      <hidenodests>false</hidenodests>
+      <analyzers name="6lowpan-pcap" />
+    </plugin_config>
+    <width>973</width>
+    <z>4</z>
+    <height>408</height>
+    <location_x>941</location_x>
+    <location_y>105</location_y>
   </plugin>
 </simconf>
 
