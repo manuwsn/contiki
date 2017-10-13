@@ -44,14 +44,15 @@
 #define PRINTF(...)
 #endif
 
-/* Half time for the freshness counter, in minutes */
-#define FRESHNESS_HALF_LIFE             20
+/* Half time for the freshness counter, in minute */
+#define FRESHNESS_HALF_LIFE             2
 /* Statistics are fresh if the freshness counter is FRESHNESS_TARGET or more */
-#define FRESHNESS_TARGET                 4
+#define FRESHNESS_TARGET                 8
 /* Maximum value for the freshness counter */
 #define FRESHNESS_MAX                   16
 /* Statistics with no update in FRESHNESS_EXPIRATION_TIMEOUT is not fresh */
-#define FRESHNESS_EXPIRATION_TIME       (10 * 60 * (clock_time_t)CLOCK_SECOND)
+#define FRESHNESS_EXPIRATION_TIME       (1 * 5 * (clock_time_t)CLOCK_SECOND)
+//#define FRESHNESS_EXPIRATION_TIME       (1 * 2 * (clock_time_t)CLOCK_SECOND)
 
 /* EWMA (exponential moving average) used to maintain statistics over time */
 #define EWMA_SCALE            100
@@ -73,7 +74,7 @@ struct ctimer periodic_timer;
 
 /* Used to initialize ETX before any transmission occurs. In order to
  * infer the initial ETX from the RSSI of previously received packets, use: */
-/* #define LINK_STATS_CONF_INIT_ETX(stats) guess_etx_from_rssi(stats) */
+//#define LINK_STATS_CONF_INIT_ETX(stats) guess_etx_from_rssi(stats) 
 
 #ifdef LINK_STATS_CONF_INIT_ETX
 #define LINK_STATS_INIT_ETX(stats) LINK_STATS_CONF_INIT_ETX(stats)
@@ -134,7 +135,7 @@ link_stats_packet_sent(const linkaddr_t *lladdr, int status, int numtx)
   struct link_stats *stats;
   uint16_t packet_etx;
   uint8_t ewma_alpha;
-
+  
   if(status != MAC_TX_OK && status != MAC_TX_NOACK) {
     /* Do not penalize the ETX when collisions or transmission errors occur. */
     return;
@@ -163,6 +164,7 @@ link_stats_packet_sent(const linkaddr_t *lladdr, int status, int numtx)
   /* Compute EWMA and update ETX */
   stats->etx = ((uint32_t)stats->etx * (EWMA_SCALE - ewma_alpha) +
       (uint32_t)packet_etx * ewma_alpha) / EWMA_SCALE;
+
 }
 /*---------------------------------------------------------------------------*/
 /* Packet input callback. Updates statistics for receptions on a given link */
@@ -183,7 +185,12 @@ link_stats_input_callback(const linkaddr_t *lladdr)
     }
     return;
   }
-
+  
+  uint16_t packet_etx = 1 * ETX_DIVISOR;
+  uint8_t ewma_alpha = link_stats_is_fresh(stats) ? EWMA_ALPHA : EWMA_BOOTSTRAP_ALPHA;
+  stats->etx = ((uint32_t)stats->etx * (EWMA_SCALE - ewma_alpha) +
+		(uint32_t)packet_etx * ewma_alpha) / EWMA_SCALE;
+    
   /* Update RSSI EWMA */
   stats->rssi = ((int32_t)stats->rssi * (EWMA_SCALE - EWMA_ALPHA) +
       (int32_t)packet_rssi * EWMA_ALPHA) / EWMA_SCALE;
@@ -206,6 +213,6 @@ void
 link_stats_init(void)
 {
   nbr_table_register(link_stats, NULL);
-  ctimer_set(&periodic_timer, 60 * (clock_time_t)CLOCK_SECOND * FRESHNESS_HALF_LIFE,
+  ctimer_set(&periodic_timer,  (clock_time_t)CLOCK_SECOND * FRESHNESS_HALF_LIFE,
       periodic, NULL);
 }
