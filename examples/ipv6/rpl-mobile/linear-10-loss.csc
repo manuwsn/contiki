@@ -89,8 +89,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>-0.4895604395604396</x>
-        <y>-0.4895604395604387</y>
+        <x>0</x>
+        <y>0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -108,7 +108,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>25.0</x>
-        <y>0.0</y>
+        <y>10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -126,7 +126,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>50.0</x>
-        <y>0.0</y>
+        <y>-10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -144,7 +144,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>75.0</x>
-        <y>0.0</y>
+        <y>10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -162,7 +162,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>100.0</x>
-        <y>0.0</y>
+        <y>-10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -180,7 +180,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>125.0</x>
-        <y>0.0</y>
+        <y>10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -198,7 +198,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>150.0</x>
-        <y>0.0</y>
+        <y>-10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -216,7 +216,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>175.0</x>
-        <y>0.0</y>
+        <y>10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -234,7 +234,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>200.0</x>
-        <y>0.0</y>
+        <y>-10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -252,7 +252,7 @@
       <interface_config>
         org.contikios.cooja.interfaces.Position
         <x>225.0</x>
-        <y>0.0</y>
+        <y>10.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
