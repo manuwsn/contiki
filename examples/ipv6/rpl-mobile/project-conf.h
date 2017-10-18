@@ -43,7 +43,7 @@
 #define UIP_CONF_MAX_ROUTES   30
 #else
 /* configure number of neighbors and routes */
-#define NBR_TABLE_CONF_MAX_NEIGHBORS     10
+#define NBR_TABLE_CONF_MAX_NEIGHBORS     4
 #define UIP_CONF_MAX_ROUTES   10
 #endif /* TEST_MORE_ROUTES */
 
@@ -60,6 +60,10 @@
 
 #define RPL_CONF_DEFAULT_ROUTE_INFINITE_LIFETIME 1
 
+#define RPL_CONF_DIO_INTERVAL_MIN 11
+#define RPL_CONF_DIO_INTERVAL_DOUBLINGS 1
+#define RPL_CONF_DIO_REDUNDANCY 4
+
 /* Save some ROM */
 #undef UIP_CONF_TCP
 #define UIP_CONF_TCP                   0
@@ -75,5 +79,9 @@
 #undef RPL_CONF_MOP
 #define RPL_CONF_MOP RPL_MOP_NON_STORING /* Mode of operation*/
 #endif /* WITH_NON_STORING */
+
+#ifndef PERIOD
+#define PERIOD 2
+#endif
 
 #endif /* PROJECT_CONF_H_ */
