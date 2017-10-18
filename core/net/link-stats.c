@@ -52,12 +52,11 @@
 #define FRESHNESS_MAX                   16
 /* Statistics with no update in FRESHNESS_EXPIRATION_TIMEOUT is not fresh */
 #define FRESHNESS_EXPIRATION_TIME       (5 * 60 * (clock_time_t)CLOCK_SECOND)
-//#define FRESHNESS_EXPIRATION_TIME       (1 * 2 * (clock_time_t)CLOCK_SECOND)
 
 /* EWMA (exponential moving average) used to maintain statistics over time */
 #define EWMA_SCALE            100
-#define EWMA_ALPHA             80 //15
-#define EWMA_BOOTSTRAP_ALPHA   90 //30
+#define EWMA_ALPHA            100 //15
+#define EWMA_BOOTSTRAP_ALPHA  100 //30
 
 /* ETX fixed point divisor. 128 is the value used by RPL (RFC 6551 and RFC 6719) */
 #define ETX_DIVISOR     LINK_STATS_ETX_DIVISOR
