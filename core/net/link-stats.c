@@ -130,14 +130,14 @@ guess_etx_from_rssi(const struct link_stats *stats)
 /* Packet sent callback. Updates stats for transmissions to lladdr */
 void
 link_stats_packet_sent(const linkaddr_t *lladdr, int status, int numtx)
-{
+{printf("send %i\n",numtx);
   struct link_stats *stats;
   uint16_t packet_etx;
   uint8_t ewma_alpha;
   
   if(status != MAC_TX_OK && status != MAC_TX_NOACK) {
     /* Do not penalize the ETX when collisions or transmission errors occur. */
-    return;
+    //return;
   }
 
   stats = nbr_table_get_from_lladdr(link_stats, lladdr);
@@ -169,7 +169,7 @@ link_stats_packet_sent(const linkaddr_t *lladdr, int status, int numtx)
 /* Packet input callback. Updates statistics for receptions on a given link */
 void
 link_stats_input_callback(const linkaddr_t *lladdr)
-{
+{printf("receive\n");
   struct link_stats *stats;
   int16_t packet_rssi = packetbuf_attr(PACKETBUF_ATTR_RSSI);
 
@@ -188,7 +188,7 @@ link_stats_input_callback(const linkaddr_t *lladdr)
   /* A received packet increases etx by 2 etx divisor */
   uint8_t ewma_alpha = link_stats_is_fresh(stats) ? EWMA_ALPHA : EWMA_BOOTSTRAP_ALPHA;
   stats->etx = ((uint32_t)stats->etx * (EWMA_SCALE - ewma_alpha) +
-		(uint32_t)ETX_DIVISOR * 2 * ewma_alpha) / EWMA_SCALE;
+		(uint32_t)0  * ewma_alpha) / EWMA_SCALE;
   
   /* Update RSSI EWMA */
   stats->rssi = ((int32_t)stats->rssi * (EWMA_SCALE - EWMA_ALPHA) +
