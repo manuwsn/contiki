@@ -43,12 +43,12 @@
 #define UIP_CONF_MAX_ROUTES   30
 #else
 /* configure number of neighbors and routes */
-#define NBR_TABLE_CONF_MAX_NEIGHBORS     4
+#define NBR_TABLE_CONF_MAX_NEIGHBORS     3
 #define UIP_CONF_MAX_ROUTES   10
 #endif /* TEST_MORE_ROUTES */
 
 #undef NETSTACK_CONF_RDC
-#define NETSTACK_CONF_RDC     nullrdc_driver
+#define NETSTACK_CONF_RDC     contikimac_driver
 #undef NULLRDC_CONF_802154_AUTOACK
 #define NULLRDC_CONF_802154_AUTOACK       1
 
@@ -60,9 +60,12 @@
 
 #define RPL_CONF_DEFAULT_ROUTE_INFINITE_LIFETIME 1
 
-#define RPL_CONF_DIO_INTERVAL_MIN 11
+#define RPL_CONF_DIO_INTERVAL_MIN 8
 #define RPL_CONF_DIO_INTERVAL_DOUBLINGS 1
 #define RPL_CONF_DIO_REDUNDANCY 4
+
+//#define RPL_CONF_OF_OCP RPL_OCP_OF0
+#define RPL_CONF_OF_OCP RPL_OCP_MRHOF
 
 /* Save some ROM */
 #undef UIP_CONF_TCP
