@@ -55,8 +55,8 @@
 
 /* EWMA (exponential moving average) used to maintain statistics over time */
 #define EWMA_SCALE            100
-#define EWMA_ALPHA            100 //15
-#define EWMA_BOOTSTRAP_ALPHA  100 //30
+#define EWMA_ALPHA            15
+#define EWMA_BOOTSTRAP_ALPHA  30
 
 /* ETX fixed point divisor. 128 is the value used by RPL (RFC 6551 and RFC 6719) */
 #define ETX_DIVISOR     LINK_STATS_ETX_DIVISOR
@@ -130,16 +130,15 @@ guess_etx_from_rssi(const struct link_stats *stats)
 /* Packet sent callback. Updates stats for transmissions to lladdr */
 void
 link_stats_packet_sent(const linkaddr_t *lladdr, int status, int numtx)
-{printf("send %i\n",numtx);
+{
   struct link_stats *stats;
   uint16_t packet_etx;
   uint8_t ewma_alpha;
-  
   if(status != MAC_TX_OK && status != MAC_TX_NOACK) {
     /* Do not penalize the ETX when collisions or transmission errors occur. */
-    //return;
+    return;
   }
-
+  
   stats = nbr_table_get_from_lladdr(link_stats, lladdr);
   if(stats == NULL) {
     /* Add the neighbor */
@@ -154,22 +153,21 @@ link_stats_packet_sent(const linkaddr_t *lladdr, int status, int numtx)
   /* Update last timestamp and freshness */
   stats->last_tx_time = clock_time();
   stats->freshness = MIN(stats->freshness + numtx, FRESHNESS_MAX);
-
+  
   /* ETX used for this update */
   packet_etx = ((status == MAC_TX_NOACK) ? ETX_NOACK_PENALTY : numtx) * ETX_DIVISOR;
   /* ETX alpha used for this update */
   ewma_alpha = link_stats_is_fresh(stats) ? EWMA_ALPHA : EWMA_BOOTSTRAP_ALPHA;
-
+  
   /* Compute EWMA and update ETX */
   stats->etx = ((uint32_t)stats->etx * (EWMA_SCALE - ewma_alpha) +
-      (uint32_t)packet_etx * ewma_alpha) / EWMA_SCALE;
-
+		(uint32_t)packet_etx * ewma_alpha) / EWMA_SCALE;
 }
 /*---------------------------------------------------------------------------*/
 /* Packet input callback. Updates statistics for receptions on a given link */
 void
 link_stats_input_callback(const linkaddr_t *lladdr)
-{printf("receive\n");
+{
   struct link_stats *stats;
   int16_t packet_rssi = packetbuf_attr(PACKETBUF_ATTR_RSSI);
 
@@ -188,7 +186,7 @@ link_stats_input_callback(const linkaddr_t *lladdr)
   /* A received packet increases etx by 2 etx divisor */
   uint8_t ewma_alpha = link_stats_is_fresh(stats) ? EWMA_ALPHA : EWMA_BOOTSTRAP_ALPHA;
   stats->etx = ((uint32_t)stats->etx * (EWMA_SCALE - ewma_alpha) +
-		(uint32_t)0  * ewma_alpha) / EWMA_SCALE;
+		(uint32_t)ETX_DIVISOR  * ewma_alpha) / EWMA_SCALE;
   
   /* Update RSSI EWMA */
   stats->rssi = ((int32_t)stats->rssi * (EWMA_SCALE - EWMA_ALPHA) +
@@ -212,6 +210,6 @@ void
 link_stats_init(void)
 {
   nbr_table_register(link_stats, NULL);
-  ctimer_set(&periodic_timer,  (clock_time_t)CLOCK_SECOND * 60*FRESHNESS_HALF_LIFE,
+  ctimer_set(&periodic_timer,  (clock_time_t)CLOCK_SECOND * 60 * FRESHNESS_HALF_LIFE,
       periodic, NULL);
 }

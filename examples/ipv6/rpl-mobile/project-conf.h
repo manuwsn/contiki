@@ -43,7 +43,7 @@
 #define UIP_CONF_MAX_ROUTES   30
 #else
 /* configure number of neighbors and routes */
-#define NBR_TABLE_CONF_MAX_NEIGHBORS     3
+#define NBR_TABLE_CONF_MAX_NEIGHBORS     10
 #define UIP_CONF_MAX_ROUTES   10
 #endif /* TEST_MORE_ROUTES */
 
@@ -84,7 +84,8 @@
 #endif /* WITH_NON_STORING */
 
 #ifndef PERIOD
-#define PERIOD 2
+#define PERIOD 5
 #endif
+
 
 #endif /* PROJECT_CONF_H_ */

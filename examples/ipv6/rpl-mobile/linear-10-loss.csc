@@ -9,12 +9,12 @@
   <simulation>
     <title>Linear-10</title>
     <speedlimit>1.0</speedlimit>
-    <randomseed>123457</randomseed>
+    <randomseed>123458</randomseed>
     <motedelay_us>1000000</motedelay_us>
     <radiomedium>
       org.contikios.cooja.radiomediums.UDGM
       <transmitting_range>50.0</transmitting_range>
-      <interference_range>100.0</interference_range>
+      <interference_range>60.0</interference_range>
       <success_ratio_tx>0.95</success_ratio_tx>
       <success_ratio_rx>0.95</success_ratio_rx>
     </radiomedium>
@@ -71,7 +71,7 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>300.00000000000404</x>
+        <x>300.0000000000008</x>
         <y>25.0</y>
         <z>25.0</z>
       </interface_config>
@@ -89,8 +89,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>0</x>
-        <y>0</y>
+        <x>0.0</x>
+        <y>0.0</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -269,7 +269,7 @@
   <plugin>
     org.contikios.cooja.plugins.SimControl
     <width>280</width>
-    <z>3</z>
+    <z>0</z>
     <height>160</height>
     <location_x>400</location_x>
     <location_y>0</location_y>
@@ -281,10 +281,11 @@
       <skin>org.contikios.cooja.plugins.skins.IDVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.GridVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.UDGMVisualizerSkin</skin>
-      <viewport>2.042648709315376 0.0 0.0 2.042648709315376 157.8964646464646 140.08570432242269</viewport>
+      <skin>org.contikios.cooja.plugins.skins.AttributeVisualizerSkin</skin>
+      <viewport>6.521212121212121 0.0 0.0 6.521212121212121 73.36363636363645 124.0909090909091</viewport>
     </plugin_config>
-    <width>868</width>
-    <z>4</z>
+    <width>2010</width>
+    <z>2</z>
     <height>400</height>
     <location_x>0</location_x>
     <location_y>421</location_y>
@@ -292,12 +293,12 @@
   <plugin>
     org.contikios.cooja.plugins.LogListener
     <plugin_config>
-      <filter />
+      <filter>ID:3</filter>
       <formatted_time />
       <coloring />
     </plugin_config>
     <width>1648</width>
-    <z>6</z>
+    <z>1</z>
     <height>367</height>
     <location_x>400</location_x>
     <location_y>160</location_y>
@@ -319,10 +320,10 @@
       <showRadioRXTX />
       <showRadioHW />
       <showLEDs />
-      <zoomfactor>500.0</zoomfactor>
+      <zoomfactor>5.0</zoomfactor>
     </plugin_config>
     <width>2048</width>
-    <z>8</z>
+    <z>4</z>
     <height>166</height>
     <location_x>0</location_x>
     <location_y>842</location_y>
@@ -334,7 +335,7 @@
       <decorations>true</decorations>
     </plugin_config>
     <width>1368</width>
-    <z>7</z>
+    <z>5</z>
     <height>160</height>
     <location_x>680</location_x>
     <location_y>0</location_y>
@@ -343,7 +344,7 @@
     org.contikios.cooja.plugins.collectview.CollectView
     <mote_arg>0</mote_arg>
     <width>233</width>
-    <z>9</z>
+    <z>6</z>
     <height>72</height>
     <location_x>34</location_x>
     <location_y>317</location_y>
@@ -354,7 +355,7 @@
       <script>var Xo=-50;
 var Yo=25;
 var Zo=25;
-var speed=50;
+var speed=30;
 var step=25;
 var Dd=(speed*step/3600);
 
@@ -387,7 +388,7 @@ sim.stopSimulation();</script>
       <active>true</active>
     </plugin_config>
     <width>600</width>
-    <z>5</z>
+    <z>3</z>
     <height>700</height>
     <location_x>1061</location_x>
     <location_y>34</location_y>
