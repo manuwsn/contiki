@@ -8,8 +8,8 @@
   <project EXPORT="discard">[APPS_DIR]/powertracker</project>
   <simulation>
     <title>Linear-10</title>
-    <speedlimit>1.0</speedlimit>
-    <randomseed>123458</randomseed>
+    <speedlimit>0.1</speedlimit>
+    <randomseed>123460</randomseed>
     <motedelay_us>1000000</motedelay_us>
     <radiomedium>
       org.contikios.cooja.radiomediums.UDGM
@@ -71,7 +71,7 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>300.0000000000008</x>
+        <x>54.58333333333365</x>
         <y>25.0</y>
         <z>25.0</z>
       </interface_config>
@@ -282,26 +282,26 @@
       <skin>org.contikios.cooja.plugins.skins.GridVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.UDGMVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.AttributeVisualizerSkin</skin>
-      <viewport>6.521212121212121 0.0 0.0 6.521212121212121 73.36363636363645 124.0909090909091</viewport>
+      <viewport>2.1839407448975354 0.0 0.0 2.1839407448975354 236.56189596583116 48.11210679324105</viewport>
     </plugin_config>
     <width>2010</width>
-    <z>2</z>
-    <height>400</height>
+    <z>3</z>
+    <height>191</height>
     <location_x>0</location_x>
     <location_y>421</location_y>
   </plugin>
   <plugin>
     org.contikios.cooja.plugins.LogListener
     <plugin_config>
-      <filter>ID:3</filter>
+      <filter />
       <formatted_time />
       <coloring />
     </plugin_config>
-    <width>1648</width>
-    <z>1</z>
-    <height>367</height>
-    <location_x>400</location_x>
-    <location_y>160</location_y>
+    <width>969</width>
+    <z>2</z>
+    <height>248</height>
+    <location_x>233</location_x>
+    <location_y>168</location_y>
   </plugin>
   <plugin>
     org.contikios.cooja.plugins.TimeLine
@@ -320,13 +320,13 @@
       <showRadioRXTX />
       <showRadioHW />
       <showLEDs />
-      <zoomfactor>5.0</zoomfactor>
+      <zoomfactor>200.0</zoomfactor>
     </plugin_config>
-    <width>2048</width>
-    <z>4</z>
-    <height>166</height>
-    <location_x>0</location_x>
-    <location_y>842</location_y>
+    <width>1116</width>
+    <z>1</z>
+    <height>299</height>
+    <location_x>62</location_x>
+    <location_y>634</location_y>
   </plugin>
   <plugin>
     org.contikios.cooja.plugins.Notes
@@ -335,7 +335,7 @@
       <decorations>true</decorations>
     </plugin_config>
     <width>1368</width>
-    <z>5</z>
+    <z>4</z>
     <height>160</height>
     <location_x>680</location_x>
     <location_y>0</location_y>
@@ -388,7 +388,7 @@ sim.stopSimulation();</script>
       <active>true</active>
     </plugin_config>
     <width>600</width>
-    <z>3</z>
+    <z>5</z>
     <height>700</height>
     <location_x>1061</location_x>
     <location_y>34</location_y>

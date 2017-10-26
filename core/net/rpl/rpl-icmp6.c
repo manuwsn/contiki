@@ -304,7 +304,7 @@ dio_input(void)
   PRINTF("RPL: Received a DIO from ");
   PRINT6ADDR(&from);
   PRINTF("\n");
-
+  printf("RPL: Received DIO from %u\n", ((uint8_t*)&from)[15]);
   buffer_length = uip_len - uip_l3_icmp_hdr_len;
 
   /* Process the DIO base option. */
@@ -475,7 +475,7 @@ dio_output(rpl_instance_t *instance, uip_ipaddr_t *uc_addr)
 #if !RPL_LEAF_ONLY
   uip_ipaddr_t addr;
 #endif /* !RPL_LEAF_ONLY */
-
+  
 #if RPL_LEAF_ONLY
   /* In leaf mode, we only send DIO messages as unicasts in response to
      unicast DIS messages. */
@@ -484,7 +484,11 @@ dio_output(rpl_instance_t *instance, uip_ipaddr_t *uc_addr)
     return;
   }
 #endif /* RPL_LEAF_ONLY */
-
+  if(uc_addr==NULL)
+    printf("RPL: Send DIO broadcast\n");
+  else
+    printf("RPL: Send DIO to %u\n",((uint8_t*)uc_addr)[15]);
+    
   /* DAG Information Object */
   pos = 0;
 
