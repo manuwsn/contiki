@@ -45,13 +45,15 @@
 #endif
 
 /* Half time for the freshness counter, in minutes */
-#define FRESHNESS_HALF_LIFE             20
+//#define FRESHNESS_HALF_LIFE             20
+#define FRESHNESS_HALF_LIFE             4
 /* Statistics are fresh if the freshness counter is FRESHNESS_TARGET or more */
-#define FRESHNESS_TARGET                 4
+#define FRESHNESS_TARGET                 8
 /* Maximum value for the freshness counter */
 #define FRESHNESS_MAX                   16
 /* Statistics with no update in FRESHNESS_EXPIRATION_TIMEOUT is not fresh */
-#define FRESHNESS_EXPIRATION_TIME       (10 * 60 * (clock_time_t)CLOCK_SECOND)
+//#define FRESHNESS_EXPIRATION_TIME       (10 * 60 * (clock_time_t)CLOCK_SECOND)
+#define FRESHNESS_EXPIRATION_TIME       (8 * (clock_time_t)CLOCK_SECOND)
 
 /* EWMA (exponential moving average) used to maintain statistics over time */
 #define EWMA_SCALE            100
@@ -61,7 +63,7 @@
 /* ETX fixed point divisor. 128 is the value used by RPL (RFC 6551 and RFC 6719) */
 #define ETX_DIVISOR     LINK_STATS_ETX_DIVISOR
 /* Number of Tx used to update the ETX EWMA in case of no-ACK */
-#define ETX_NOACK_PENALTY                   10
+#define ETX_NOACK_PENALTY                   30
 /* Initial ETX value */
 #define ETX_INIT                             2
 
@@ -206,6 +208,6 @@ void
 link_stats_init(void)
 {
   nbr_table_register(link_stats, NULL);
-  ctimer_set(&periodic_timer, 60 * (clock_time_t)CLOCK_SECOND * FRESHNESS_HALF_LIFE,
+  ctimer_set(&periodic_timer, 1 * (clock_time_t)CLOCK_SECOND * FRESHNESS_HALF_LIFE,
       periodic, NULL);
 }
